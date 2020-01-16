@@ -17,6 +17,8 @@ zuul:
     auth-server:
       path: /auth/**
       serviceId: auth-server
+  trace-request-body: true
+
 
 security:
   oauth2:
@@ -25,13 +27,20 @@ security:
       user-authorization-uri: http://localhost:7777/auth/oauth/authorize
       client-id: epxing-auth
       client-secret: epxing
-      grant-type: custom
+      grant-type: password
+#      grant-type: authorization_code
     resource:
       jwt:
         key-value: epxing
+    sso:
+      login-path: /auth-server/auth/login
+    authorization:
+      check-token-access:  http://localhost:7777/auth/oauth/check_token
+
 
 
 logging:
   level:
     org.springframework.security: debug
+    com.netflix: DEBUG
 
