@@ -1,0 +1,37 @@
+spring:
+  application:
+    name: zuul-server
+server:
+  port: 5555
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: "http://admin:epxing@${eureka.host:127.0.0.1}:${eureka.port:8761}/eureka/"
+  instance:
+    prefer-ip-address: true
+zuul:
+  routes:
+    client-a:
+      path: /demo/**
+      serviceId: client-demo
+    auth-server:
+      path: /auth/**
+      serviceId: auth-server
+
+security:
+  oauth2:
+    client:
+      access-token-uri: http://localhost:7777/auth/oauth/token
+      user-authorization-uri: http://localhost:7777/auth/oauth/authorize
+      client-id: epxing-auth
+      client-secret: epxing
+      grant-type: custom
+    resource:
+      jwt:
+        key-value: epxing
+
+
+logging:
+  level:
+    org.springframework.security: debug
+
