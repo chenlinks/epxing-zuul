@@ -1,14 +1,23 @@
 spring:
   application:
     name: zuul-server
+
+
+
 server:
   port: 5555
+  use-forward-headers: true
+
+
 eureka:
   client:
     serviceUrl:
-      defaultZone: "http://admin:epxing@${eureka.host:127.0.0.1}:${eureka.port:8761}/eureka/"
+      defaultZone: "http://admin:epxing@${eureka.host:127.0.0.1}:${eureka.port:8761}/eureka"
   instance:
     prefer-ip-address: true
+
+
+
 zuul:
   routes:
     client-a:
@@ -17,7 +26,9 @@ zuul:
     auth-server:
       path: /auth/**
       serviceId: auth-server
-  trace-request-body: true
+      stripPrefix: true
+  sensitive-headers: Cookie,Set-Cookie
+
 
 
 security:
@@ -27,8 +38,8 @@ security:
       user-authorization-uri: http://localhost:7777/auth/oauth/authorize
       client-id: epxing-auth
       client-secret: epxing
-      grant-type: password
-#      grant-type: authorization_code
+#      grant-type: password
+      grant-type: authorization_code
     resource:
       jwt:
         key-value: epxing
@@ -44,3 +55,8 @@ logging:
     org.springframework.security: debug
     com.netflix: DEBUG
 
+
+# logback日志配置,日志环境类型，服务名，级别
+log.env.profile: dev
+log.env.module: epxing-zuul
+log.env.logger.level: info

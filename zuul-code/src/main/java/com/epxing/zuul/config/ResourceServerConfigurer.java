@@ -2,6 +2,7 @@ package com.epxing.zuul.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
+import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
 
@@ -12,6 +13,7 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Res
  */
 @Order(3)
 @Configuration
+@EnableResourceServer
 public class ResourceServerConfigurer extends ResourceServerConfigurerAdapter {
 
     @Override
