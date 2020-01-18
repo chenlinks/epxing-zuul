@@ -20,7 +20,7 @@ eureka:
 
 zuul:
   routes:
-    client-a:
+    client-demo:
       path: /demo/**
       serviceId: client-demo
     auth-server:
