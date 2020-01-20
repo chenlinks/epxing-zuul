@@ -61,7 +61,8 @@ public class AuthHeaderFilter extends ZuulFilter {
 
         //设置响应字符编码
         requestContext.getResponse().setCharacterEncoding("UTF-8");
-        requestContext.getResponse().setContentType("text/html;cahrset=UTF-8");
+        requestContext.getResponse().setContentType("application/json; charset=utf-8");
+
         if(blackList.contains(requestURL)){
             //返回错误提示
             requestContext.setSendZuulResponse(false);
